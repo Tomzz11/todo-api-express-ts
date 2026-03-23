@@ -60,3 +60,15 @@ export const deleteTodo = (req: Request, res: Response) => {
   res.status(200).json({ message: 'Todo deleted successfully' });
 };
 
+export const getTodoById = (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const todo = todos.find(t => t.id === parseInt(id as string, 10));
+  
+  if (!todo) {
+    return res.status(404).json({ message: 'Todo not found' });
+  }
+
+  res.status(200).json(todo);
+};
+
